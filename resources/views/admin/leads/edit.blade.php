@@ -16,7 +16,7 @@
 @section('content')
 <div class="container">
 	<h1 class="title">Edit Lead #{{ $lead->id }}</h1>
-	<form action="/leads/{{ $lead->id }}" method="POST">
+	<form action="/admin/leads/{{ $lead->id }}" method="POST">
 		<input type="hidden" name="_method" value="PUT" />
 		@include('admin.leads._form')
 	</form>

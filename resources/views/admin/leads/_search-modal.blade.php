@@ -7,7 +7,7 @@
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
-			<form action="/leads/search" method="GET">
+			<form action="/admin/leads/search" method="GET">
 				<div class="modal-body">
 					<div class="input-group">
 						<div class="input-group-prepend">

@@ -9,7 +9,7 @@
 			</p>
 		</div>
 		<div class="card-footer">
-			<form action="/leads/{{ $lead->id }}" method="POST">
+			<form action="/admin/leads/{{ $lead->id }}" method="POST">
 				@csrf
 				<input type="hidden" name="_method" value="DELETE" />
 				<button type="submit" class="btn btn-danger">Delete</button>

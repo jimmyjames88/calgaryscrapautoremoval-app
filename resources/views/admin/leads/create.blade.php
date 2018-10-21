@@ -11,7 +11,7 @@
 @section('content')
 <div class="container">
 	<h1 class="title">New Lead</h1>
-	<form action="/leads" method="POST">
+	<form action="/admin/leads" method="POST">
 		@include('admin.leads._form')
 	</form>
 </div>
