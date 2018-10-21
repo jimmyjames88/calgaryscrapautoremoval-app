@@ -48,7 +48,7 @@ class LeadController extends Controller
 
 		if($lead){
 			session()->flash('success', 'Lead created');
-			return redirect('leads');
+			return redirect('/admin/leads');
 		}
     }
 
@@ -101,7 +101,7 @@ class LeadController extends Controller
 
 		if($lead->save()){
 			session()->flash('success', 'Changes saved!');
-			return redirect('leads/' . $lead->id);
+			return redirect('/admin/leads/' . $lead->id);
 		} else {
 
 		}
@@ -123,7 +123,7 @@ class LeadController extends Controller
 
 		}
 
-		return redirect('leads');
+		return redirect('/admin/leads');
     }
 
 	public function delete($id)
