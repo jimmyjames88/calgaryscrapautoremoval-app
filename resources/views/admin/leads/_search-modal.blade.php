@@ -10,7 +10,7 @@
 			<form action="/leads/search" method="GET">
 				<div class="modal-body">
 					<div class="form-group">
-						<input type="date" name="searchDate" class="form-control" />
+						<input type="date" name="searchDate" placeholder="Select date" class="form-control" />
 					</div>
 
 				</div>
