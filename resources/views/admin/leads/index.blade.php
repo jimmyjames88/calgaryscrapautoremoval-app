@@ -49,7 +49,7 @@
 		<tbody>
 			@if($leads->count())
 				@foreach($leads as $lead)
-				<tr onclick="window.location.href='/leads/{{ $lead->id }}'" class="cursor-pointer">
+				<tr onclick="window.location.href='/admin/leads/{{ $lead->id }}'" class="cursor-pointer">
 					<td>{{ $lead->name }}</td>
 					<td class="d-none d-sm-table-cell">{{ $lead->email }}</td>
 					<td>{{ $lead->created_at->diffForHumans() }}</td>
