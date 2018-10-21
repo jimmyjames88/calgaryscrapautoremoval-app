@@ -3,7 +3,7 @@
 <div class="row">
 	@if(request('searchDate'))
 	<div class="col">
-		<a href="/leads" class="btn btn-secondary">
+		<a href="/admin/leads" class="btn btn-secondary">
 			<i class="fa fa-caret-left"></i> Back
 		</a>
 	</div>
@@ -18,7 +18,7 @@
 		<button class="btn btn-primary" data-toggle="modal" data-target="#searchDateModal">
 			<i class="fa fa-search"></i>
 		</button>
-		<a href="/leads/create" class="btn btn-primary">
+		<a href="/admin/leads/create" class="btn btn-primary">
 			<i class="fa fa-plus"></i>
 		</a>
 	</div>

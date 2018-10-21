@@ -2,12 +2,12 @@
 @section('mobileNav')
 <div class="row">
 	<div class="col">
-		<a href="/leads/{{ $lead->id }}" class="btn btn-secondary">
+		<a href="/admin/leads/{{ $lead->id }}" class="btn btn-secondary">
 			<i class="fa fa-arrow-left"></i> Back
 		</a>
 	</div>
 	<div class="col text-right">
-		<a href="/leads/{{ $lead->id }}/delete" class="btn btn-danger">
+		<a href="/admin/leads/{{ $lead->id }}/delete" class="btn btn-danger">
 			Delete <i class="fa fa-trash"></i>
 		</a>
 	</div>

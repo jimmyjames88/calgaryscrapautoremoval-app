@@ -2,7 +2,7 @@
 @section('mobileNav')
 <div class="row">
 	<div class="col">
-		<a href="/leads" class="btn btn-secondary">
+		<a href="/admin/leads" class="btn btn-secondary">
 			<i class="fa fa-arrow-left"></i> Back
 		</a>
 	</div>

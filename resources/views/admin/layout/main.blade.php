@@ -10,7 +10,7 @@
 	</head>
 	<body>
 		<div id="app">
-			<nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
+			<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
 				<a class="navbar-brand" href="#">Calgary Scrap Auto Removal</a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
@@ -19,7 +19,7 @@
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
 					<ul class="navbar-nav mr-auto">
 						<li class="nav-item">
-							<a class="nav-link" href="/leads">
+							<a class="nav-link" href="/admin/leads">
 								<i class="fa fa-address-card-o"></i> Leads
 							</a>
 						</li>
@@ -33,6 +33,11 @@
 								<i class="fa fa-cog"></i> Settings
 							</a>
 						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="/auth/logout">
+								<i class="fa fa-sign-out"></i> Sign out
+							</a>
+						</li>
 					</ul>
 				</div>
 			</nav>
@@ -43,7 +48,7 @@
 				<nav>
 					<ul>
 						<li>
-							<a href="/leads">Leads</a>
+							<a href="/admin/leads">Leads</a>
 						</li>
 					</ul>
 				</nav>

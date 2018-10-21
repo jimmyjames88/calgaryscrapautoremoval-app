@@ -9,7 +9,12 @@
 			</div>
 			<form action="/leads/search" method="GET">
 				<div class="modal-body">
-					<div class="form-group">
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<div class="input-group-text">
+								<i class="fa fa-calendar"></i>
+							</div>
+						</div>
 						<input type="date" name="searchDate" placeholder="Select date" class="form-control" />
 					</div>
 

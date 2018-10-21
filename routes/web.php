@@ -11,13 +11,17 @@
 |
 */
 
-Route::get('/', 'AdminController@index');
-Route::get('/leads', 'LeadController@index');
-Route::post('/leads', 'LeadController@store');
-Route::get('/leads/create', 'LeadController@create');
-Route::get('/leads/search', 'LeadController@search');
-Route::get('/leads/{lead}/edit', 'LeadController@edit');
-Route::get('/leads/{lead}/delete', 'LeadController@delete');
-Route::get('/leads/{lead}', 'LeadController@show');
-Route::put('/leads/{lead}', 'LeadController@update');
-Route::delete('/leads/{lead}', 'LeadController@destroy');
+Route::get('/', function(){
+	return redirect('/admin/leads');
+});
+
+Route::get('/admin', 'AdminController@index');
+Route::get('/admin/leads', 'LeadController@index');
+Route::post('/admin/leads', 'LeadController@store');
+Route::get('/admin/leads/create', 'LeadController@create');
+Route::get('/admin/leads/search', 'LeadController@search');
+Route::get('/admin/leads/{lead}/edit', 'LeadController@edit');
+Route::get('/admin/leads/{lead}/delete', 'LeadController@delete');
+Route::get('/admin/leads/{lead}', 'LeadController@show');
+Route::put('/admin/leads/{lead}', 'LeadController@update');
+Route::delete('/admin/leads/{lead}', 'LeadController@destroy');

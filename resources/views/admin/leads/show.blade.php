@@ -2,12 +2,12 @@
 @section('mobileNav')
 <div class="row">
 	<div class="col">
-		<a href="/leads" class="btn btn-secondary">
+		<a href="/admin/leads" class="btn btn-secondary">
 			<i class="fa fa-arrow-left"></i> Back
 		</a>
 	</div>
 	<div class="col text-right">
-		<a href="/leads/{{ $lead->id }}/edit" class="btn btn-primary">
+		<a href="/admin/leads/{{ $lead->id }}/edit" class="btn btn-primary">
 			Edit <i class="fa fa-pencil"></i>
 		</a>
 	</div>
@@ -18,12 +18,13 @@
 	<h1 class="title">{{ $lead->name }}</h1>
 	<div class="card mb-3">
 		<div class="card-body">
-			<h6 class="card-title mb-0">Submitted: {{ date('l F jS, Y', strtotime($lead->created_at)) }}</h6>
+			<h6 class="card-title mb-0">
+				<span class="text-muted">Submitted:</span> {{ date('F jS, Y @ h:ia', strtotime($lead->created_at)) }}</h6>
 		</div>
 	</div>
 	<div class="card mb-3">
 		<div class="card-body">
-			<h5 class="card-title">Message:</h5>
+			<h5 class="card-title text-muted">Message:</h5>
 			{{ $lead->message }}
 		</div>
 	</div>

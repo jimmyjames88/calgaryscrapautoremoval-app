@@ -1,0 +1,32 @@
+#header-phone i {
+    position: relative;
+    top: 3px
+}
+
+#header-phone {
+    margin-top: 14px;
+    margin-bottom: 0
+}
+
+#header-phone-button {
+    float: right;
+    margin: 10px 0 0 0
+}
+
+a.white {
+    color: #fff
+}
+
+nav.navbar {
+    height: 68px
+}
+
+nav.navbar .navbar-header {
+    width: 100%
+}
+
+@media screen and (max-width:1023px) {
+    nav.navbar {
+        height: 54px
+    }
+}

@@ -11,6 +11,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
+		DB::table('leads')->insert([
+		   'name' => str_random(10),
+		   'email' => str_random(10).'@gmail.com',
+		   'phone' => str_random(10),
+		   'message' => str_random(150)
+	   ]);
     }
 }
