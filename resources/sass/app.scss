@@ -1,0 +1,27 @@
+
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+//@import url('https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css');
+@import '~font-awesome/scss/font-awesome';
+
+.navbar-laravel {
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+ul.pagination {
+	float: right;
+}
+
+tr.cursor-pointer td {
+	cursor: pointer;
+}
+
+.hidden-row {
+	display: none;
+}
