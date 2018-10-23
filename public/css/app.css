@@ -13531,6 +13531,7 @@ ul.pagination {
   float: right;
 }
 
+.cursor-pointer,
 tr.cursor-pointer td {
   cursor: pointer;
 }

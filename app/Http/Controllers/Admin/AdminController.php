@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use App\Lead;
+use App\Http\Controllers\Controller;
+use App\Admin\Lead;
+use Carbon\Carbon;
 
 class AdminController extends Controller
 {
@@ -14,7 +16,12 @@ class AdminController extends Controller
      */
     public function index()
     {
-		$leadCount = Lead::whereDate('created_at', '=', date('Y-m-d'))->count();
+		$leadCount = array();
+		$leadCount['daily'] = Lead::whereDate('created_at', '=', date('Y-m-d'))->count();
+		$leadCount['weekly'] = Lead::whereBetween('created_at', [
+			new Carbon(date('Y-m-d 00:00:00', strtotime('-7 days'))),
+			new Carbon(date('Y-m-d H:i:s'))
+		])->count();
         return view('admin.index', compact('leadCount'));
     }
 

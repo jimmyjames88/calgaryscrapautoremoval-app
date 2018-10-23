@@ -15,7 +15,7 @@
 								<i class="fa fa-calendar"></i>
 							</div>
 						</div>
-						<input type="date" name="searchDate" placeholder="Select date" class="form-control" />
+						<input type="date" name="searchDate" class="form-control" value="{{ ( request('searchDate') ? request('searchDate') : date('Y-m-d') ) }}" />
 					</div>
 
 				</div>

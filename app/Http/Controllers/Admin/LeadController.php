@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use App\Lead;
+use App\Http\Controllers\Controller;
+use App\Admin\Lead;
 
 class LeadController extends Controller
 {
@@ -61,6 +62,12 @@ class LeadController extends Controller
     public function show($id)
     {
         $lead = Lead::find($id);
+
+		// Mark unread when shown
+		if($lead->unread) {
+			$lead->unread = false;
+			$lead->save();
+		}
 		return view('admin.leads.show', compact('lead'));
     }
 
@@ -134,8 +141,7 @@ class LeadController extends Controller
 
 	public function search(Request $request)
 	{
-
-		$leads = Lead::whereDate('created_at', date('Y-m-d', strtotime($request->searchDate)))->simplePaginate(30);
+		$leads = Lead::whereDate('created_at', date('Y-m-d', strtotime($request->searchDate)))->latest()->simplePaginate(30);
 		return view('admin.leads.index', compact('leads'));
 	}
 }

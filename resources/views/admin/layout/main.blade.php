@@ -12,6 +12,7 @@
 		<div id="app">
 			<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
 				<a class="navbar-brand" href="#">Calgary Scrap Auto Removal</a>
+				@if(Auth::check())
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
@@ -23,23 +24,28 @@
 								<i class="fa fa-address-card-o"></i> Leads
 							</a>
 						</li>
+						@if(auth()->user()->hasPermission('manage-testimonials'))
 						<li class="nav-item">
-							<a class="nav-link" href="/testimonials">
+							<a class="nav-link" href="/admin/testimonials">
 								<i class="fa fa-comment"></i> Testimonials
 							</a>
 						</li>
+						@endif
+						@if(auth()->user()->hasPermission('manage-users') || auth()->user()->hasPermission('manage-emails'))
 						<li class="nav-item">
-							<a class="nav-link" href="/settings">
+							<a class="nav-link" href="/admin/settings">
 								<i class="fa fa-cog"></i> Settings
 							</a>
 						</li>
+						@endif
 						<li class="nav-item">
-							<a class="nav-link" href="/auth/logout">
+							<a class="nav-link" href="/logout">
 								<i class="fa fa-sign-out"></i> Sign out
 							</a>
 						</li>
 					</ul>
 				</div>
+				@endif
 			</nav>
 
 
@@ -62,6 +68,13 @@
 			<div class="container">
 				<div class="alert alert-success">
 					<i class="fa fa-check"></i>{{ session()->get('success') }}
+				</div>
+			</div>
+			@endif
+			@if(session()->has('error'))
+			<div class="container">
+				<div class="alert alert-danger">
+					<i class="fa fa-close"></i>{{ session()->get('error') }}
 				</div>
 			</div>
 			@endif

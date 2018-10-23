@@ -3,19 +3,24 @@
 <div class="row">
 	<div class="col">
 		<a href="/admin/leads" class="btn btn-secondary">
-			<i class="fa fa-arrow-left"></i> Back
+			<i class="fa fa-arrow-left"></i>
 		</a>
 	</div>
+	@if (auth()->user()->hasPermission('manage-leads'))
 	<div class="col text-right">
 		<a href="/admin/leads/{{ $lead->id }}/edit" class="btn btn-primary">
-			Edit <i class="fa fa-pencil"></i>
+			<i class="fa fa-pencil"></i>
+		</a>
+		<a href="/admin/leads/{{ $lead->id }}/delete" class="btn btn-danger">
+			<i class="fa fa-trash"></i>
 		</a>
 	</div>
+	@endif
 </div>
 @endsection
 @section('content')
 <div class="container">
-	<h1 class="title">{{ $lead->name }}</h1>
+	<h3 class="title">{{ $lead->name }}</h3>
 	<div class="card mb-3">
 		<div class="card-body">
 			<h6 class="card-title mb-0">

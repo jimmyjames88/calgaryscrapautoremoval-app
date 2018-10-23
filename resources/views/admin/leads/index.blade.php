@@ -4,13 +4,13 @@
 	@if(request('searchDate'))
 	<div class="col">
 		<a href="/admin/leads" class="btn btn-secondary">
-			<i class="fa fa-caret-left"></i> Back
+			<i class="fa fa-caret-left"></i>
 		</a>
 	</div>
 	@else
 	<div class="col">
-		<a href="/" class="btn btn-secondary">
-			<i class="fa fa-home"></i> Home
+		<a href="/admin" class="btn btn-secondary">
+			<i class="fa fa-home"></i>
 		</a>
 	</div>
 	@endif
@@ -18,9 +18,11 @@
 		<button class="btn btn-primary" data-toggle="modal" data-target="#searchDateModal">
 			<i class="fa fa-search"></i>
 		</button>
+		@if (auth()->user()->hasPermission('manage-leads'))
 		<a href="/admin/leads/create" class="btn btn-primary">
 			<i class="fa fa-plus"></i>
 		</a>
+		@endif
 	</div>
 </div>
 @endsection
@@ -38,21 +40,23 @@
 			</h5>
 		</div>
 	</div>
-	<table class="table table-hover table-striped">
+	<table class="table table-hover">
 		<thead>
 			<tr>
 				<th>Name</th>
 				<th class="d-none d-sm-table-cell">Email</th>
-				<th>Submitted</th>
+				<th class="text-right">Submitted</th>
 			</tr>
 		</thead>
 		<tbody>
 			@if($leads->count())
 				@foreach($leads as $lead)
-				<tr onclick="window.location.href='/admin/leads/{{ $lead->id }}'" class="cursor-pointer">
+				<tr
+					onclick="window.location.href='/admin/leads/{{ $lead->id }}'"
+					class="cursor-pointer {{ ($lead->unread ? 'table-warning' : '') }}">
 					<td>{{ $lead->name }}</td>
 					<td class="d-none d-sm-table-cell">{{ $lead->email }}</td>
-					<td>{{ $lead->created_at->diffForHumans() }}</td>
+					<td class="text-right">{{ $lead->created_at->diffForHumans() }}</td>
 				</tr>
 
 				@endforeach

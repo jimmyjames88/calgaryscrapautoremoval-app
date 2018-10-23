@@ -3,12 +3,7 @@
 <div class="row">
 	<div class="col">
 		<a href="/admin/leads/{{ $lead->id }}" class="btn btn-secondary">
-			<i class="fa fa-arrow-left"></i> Back
-		</a>
-	</div>
-	<div class="col text-right">
-		<a href="/admin/leads/{{ $lead->id }}/delete" class="btn btn-danger">
-			Delete <i class="fa fa-trash"></i>
+			<i class="fa fa-caret-left"></i> Back
 		</a>
 	</div>
 </div>

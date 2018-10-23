@@ -3,7 +3,7 @@
 <div class="row">
 	<div class="col">
 		<a href="/admin/leads" class="btn btn-secondary">
-			<i class="fa fa-arrow-left"></i> Back
+			<i class="fa fa-caret-left"></i>
 		</a>
 	</div>
 </div>
