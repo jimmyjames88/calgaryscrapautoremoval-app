@@ -13,9 +13,9 @@ use App\User;
 |
 */
 
-Route::get('/', function(){
-	return redirect('/admin/leads');
-});
+Route::get('/', 'HomepageController@index');
+
+Route::post('/contact', 'Admin\LeadController@submission');
 
 Route::middleware(['auth'])->group(function(){
 	Route::get('/admin', 'Admin\AdminController@index');
@@ -27,9 +27,7 @@ Route::middleware(['auth'])->group(function(){
 	Route::get('/admin/leads/{lead}', 'Admin\LeadController@show');
 	Route::get('/admin/leads/{lead}/edit', 'Admin\LeadController@edit');
 	Route::put('/admin/leads/{lead}', 'Admin\LeadController@update');
-	Route::get('/admin/settings', function(){
-		return view('admin.settings.index');
-	});
+	Route::get('/admin/settings', 'Admin\AdminController@settings');
 });
 
 Route::middleware(['auth', 'checkPermission:manage-users'])->group(function(){
@@ -51,6 +49,7 @@ Route::middleware(['auth', 'checkPermission:manage-testimonials'])->group(functi
 	Route::put('/admin/testimonials/{testimonial}', 'Admin\TestimonialController@update');
 	Route::get('/admin/testimonials/{testimonial}/delete', 'Admin\TestimonialController@delete');
 	Route::delete('/admin/testimonials/{testimonial}', 'Admin\TestimonialController@destroy');
+	Route::post('/admin/testimonials/sort', 'Admin\TestimonialController@sort');
 });
 
 Route::middleware(['auth', 'checkPermission:manage-emails'])->group(function(){
@@ -62,7 +61,7 @@ Route::middleware(['auth', 'checkPermission:manage-emails'])->group(function(){
 Route::middleware(['auth', 'checkPermission:manage-leads'])->group(function(){
 
 	Route::get('/admin/leads/{lead}/delete', 'Admin\LeadController@delete');
-
+	Route::delete('/admin/leads/{lead}', 'Admin\LeadController@destroy');
 });
 
 

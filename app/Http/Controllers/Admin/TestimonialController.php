@@ -8,6 +8,18 @@ use App\Testimonial;
 
 class TestimonialController extends Controller
 {
+
+	private $validation_rules;
+
+	public function __construct()
+	{
+
+		$this->validation_rules = [
+			'name'		=>	'required|min:2|max:20',
+			'comment'	=>	'required|min:10|max:600'
+		];
+	}
+
     /**
      * Display a listing of the resource.
      *
@@ -15,8 +27,12 @@ class TestimonialController extends Controller
      */
     public function index()
     {
-        $testimonials = Testimonial::all();
-		return view('admin.testimonials.index', compact('testimonials'));
+		$page = [
+			'title'		=>	'Testimonials',
+			'backUrl'	=>	'/admin'
+		];
+        $testimonials = Testimonial::orderBy('order', 'ASC')->get();
+		return view('admin.testimonials.index', compact('testimonials', 'page'));
     }
 
     /**
@@ -26,7 +42,12 @@ class TestimonialController extends Controller
      */
     public function create()
     {
-        //
+		$page = [
+			'title'		=>	'Create Testimonial',
+			'backUrl'	=>	'/admin/testimonials'
+		];
+        $testimonial = new Testimonial;
+		return view('admin.testimonials.create', compact('testimonial', 'page'));
     }
 
     /**
@@ -37,7 +58,14 @@ class TestimonialController extends Controller
      */
     public function store(Request $request)
     {
-        //
+		$data = $request->validate($this->validation_rules);
+		$data['order'] = Testimonial::count();
+        $testimonial = Testimonial::create($data);
+
+		if($testimonial){
+			session()->flash('success', 'Testimonial created');
+			return redirect('/admin/testimonials');
+		}
     }
 
     /**
@@ -59,8 +87,12 @@ class TestimonialController extends Controller
      */
     public function edit($id)
     {
+		$page = [
+			'title'		=>	'Edit Testimonial',
+			'backUrl'	=>	'/admin/testimonials'
+		];
         $testimonial = Testimonial::find($id);
-		return view('admin.testimonials.edit', compact('testimonial'));
+		return view('admin.testimonials.edit', compact('testimonial', 'page'));
     }
 
     /**
@@ -72,7 +104,20 @@ class TestimonialController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $testimonial = Testimonial::find($id);
+		$data = $request->validate($this->validation_rules);
+
+		$testimonial->name = $data['name'];
+		$testimonial->comment = $data['comment'];
+
+		if($testimonial->save()){
+			session()->flash('success', 'Changes saved');
+			return redirect('/admin/testimonials/');
+		}
+
+		session()->flash('error', 'Testimonial could not be saved');
+		return redirect()->back();
+
     }
 
     /**
@@ -83,6 +128,29 @@ class TestimonialController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $testimonial = Testimonial::destroy($id);
+		if($testimonial){
+			session()->flash('success', 'Testimonial deleted!');
+		} else {
+
+		}
+
+		return redirect('/admin/testimonials');
     }
+
+	public function delete($id)
+	{
+		$page = [
+			'backUrl'	=>	'/admin'
+		];
+		$testimonial = Testimonial::find($id);
+		return view('admin.testimonials.delete', compact('testimonial'));
+	}
+
+	public function sort(Request $request)
+	{
+		if(Testimonial::sort($request->all())){
+			echo json_encode(array('status' => 'success'));
+		}
+	}
 }

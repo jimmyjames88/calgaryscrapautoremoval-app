@@ -16,6 +16,7 @@ class AdminController extends Controller
      */
     public function index()
     {
+
 		$leadCount = array();
 		$leadCount['daily'] = Lead::whereDate('created_at', '=', date('Y-m-d'))->count();
 		$leadCount['weekly'] = Lead::whereBetween('created_at', [
@@ -24,6 +25,15 @@ class AdminController extends Controller
 		])->count();
         return view('admin.index', compact('leadCount'));
     }
+
+	public function settings()
+	{
+		$page = [
+			'title'		=> 'Settings',
+			'backUrl'	=>	'/admin'
+		];
+		return view('admin.settings.index', compact('page'));
+	}
 
     /**
      * Show the form for creating a new resource.

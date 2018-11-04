@@ -5,6 +5,7 @@
 	    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta http-equiv="Cache-Control" content="max-age=86400" />
 		<meta http-equiv="content-language" content="en-US" />
+		<meta name="csrf-token" content="{{ csrf_token() }}">
 		<link rel="canonical" href="http://calgaryscrapautoremoval.com/" />
 		<meta content="Calgary Scrap Auto Removal Calgary" property="dc:title" />
 		<meta property="og:url" content="http://calgaryscrapautoremoval.com/" />
@@ -16,7 +17,12 @@
 		<meta name="keywords" content="cash for junk cars calgary, cash for cars calgary, junk car calgary, junk car towing, junk car removal calgary, junk my car calgary">
 
         <link href="img/assets/favicon.png" rel="icon" type="image/png">
-		<link href="/css/webpage.css" rel="stylesheet" />
+        <link href="css/init.css" rel="stylesheet" type="text/css">
+        <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link href="css/theme.min.css" rel="stylesheet" type="text/css">
+        <link href="css/colors/green.min.css" rel="stylesheet" type="text/css">
+		<link href="css/custom.css" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRaleway:400,100,200,300%7CHind:400,300" rel="stylesheet" type="text/css">
     </head>
     <body data-fade-in="true">
 
@@ -60,7 +66,7 @@
 					</div>
 
 					<div class="col-md-8 col-md-offset-2 contact box-style">
-						<div id="message-info"></div>
+
 						<!-- Forms can be functional only on server. Upload to your server when testing. -->
 						<form id="contactform" method="post">
 
@@ -76,11 +82,13 @@
 							<div class="col-sm-12">
 								<textarea name="message" rows="9" id="message" placeholder="Vehicle Year/Make/Model/Mileage" required></textarea>
 							</div>
+
 							<div class="col-md-12">
 								<input type="submit" class="submit btn btn-lg btn-primary" id="submit" value="Get Quote!"/>
 							</div>
 
 						</form>
+						<div id="message-info"></div>
 					</div>
 
 				</div>
@@ -90,6 +98,7 @@
         </section>
         <!-- End Hero Slider -->
 
+		@if(count($testimonials))
 		<!-- Testimonials -->
         <section id="testimonials" class="parallax pt30 pb80" data-overlay-dark="9">
 
@@ -103,52 +112,18 @@
                     <div class="col-md-12 text-center">
 
                         <div class="testimonials quote-icons" data-autoplay="false" data-speed="4000">
+							@foreach($testimonials->slice(0,5) as $testimonial)
+                            <!-- Testimonial -->
+                            <div>
+                                <p>
+                                    <i class="vossen-quote color"></i>
+                                    {{ $testimonial->comment }}
+                                    <i class="vossen-quote color"></i>
+                                </p>
+                                <span>{{ $testimonial->name }}</span>
+                            </div>
+							@endforeach
 
-                            <!-- Testimonial One -->
-                            <div>
-                                <p>
-                                    <i class="vossen-quote color"></i>
-                                    Fast and courteous service.  Thanks Calgary Auto Scrap Removal! Instead of an eyesore littering the neighborhood, I was paid $200 cash for my old clunker.  A pleasure working with your drivers to ensure that old car was efficiently removed for recycling
-                                    <i class="vossen-quote color"></i>
-                                </p>
-                                <span>Sarah T.</span>
-                            </div>
-                            <!-- Testimonial Two -->
-                            <div>
-                                <p>
-                                    <i class="vossen-quote color"></i>
-                                    I thought I'd have to wait since I did an online form, but your representative contacted me for same day pickup! I had my old busted car removed from my driveway in no time at all. The money was just a bonus
-                                    <i class="vossen-quote color"></i>
-                                </p>
-                                <span>Larry E.</span>
-                            </div>
-                            <!-- Testimonial Three -->
-                            <div>
-                                <p>
-                                    <i class="vossen-quote color"></i>
-                                    Sometimes getting someone to pick up an old non-running clunker is such a pain.  Before I contacted Calgary Auto Scrap Removal I went through a bunch of other auto recyclers who refused to come take the car due to its location.  I know I'm not the only one who lives someplace with underground parking.  I recommend Calgary Auto Scrap Removal for anyone living in downtown Calgary.
-                                    <i class="vossen-quote color"></i>
-                                </p>
-                                <span>Mark O.</span>
-                            </div>
-                            <!-- Testimonial Four -->
-                            <div>
-                                <p>
-                                    <i class="vossen-quote color"></i>
-                                    You know how some people's trash is another person's treasure?  Well, my old scrap car was worth a sweet thousand dollars to Calgary Scrap Auto Removal. And here I was ready to just have it hauled to the scrap yard!
-                                    <i class="vossen-quote color"></i>
-                                </p>
-                                <span>Lucy R.</span>
-                            </div>
-                            <!-- Testimonial Five -->
-                            <div>
-                                <p>
-                                    <i class="vossen-quote color"></i>
-                                    Excellent service and a professional, friendly driver came on time to pick up the vehicle.  I had no idea that he would have cash on hand to pay for the car. What a pleasant surprise that was!
-                                    <i class="vossen-quote color"></i>
-                                </p>
-                                <span>Thomas T.</span>
-                            </div>
 
                         </div>
 
@@ -166,69 +141,15 @@
             <div class="container">
                 <div class="row">
 
+					@foreach($testimonials as $testimonial)
                     <div class="col-sm-6 feature-left">
                         <i class="fa fa-quote-left back-icon"></i>
                         <div class="feature-left-content">
-                            <strong>Thomas T.</strong>
-                            <p>Excellent service and a professional, friendly driver came on time to pick up the vehicle.  I had no idea that he would have cash on hand to pay for the car. What a pleasant surprise that was!</p>
+                            <strong>{{ $testimonial->name }}</strong>
+                            <p>{{ $testimonial->comment }}</p>
                         </div>
                     </div>
-
-                    <div class="col-sm-6 feature-left">
-                        <i class="fa fa-quote-left back-icon"></i>
-                        <div class="feature-left-content">
-                            <strong>Sarah T.</strong>
-                            <p>Wow, such fast and courteous service.  Thank you Calgary Auto Scrap Removal! Instead of an eyesore littering the neighborhood, my old clunker gleaned me $200 dollars.  A pleasure working with your drivers to ensure that old car was efficiently removed for recycling</p>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6 feature-left">
-                        <i class="fa fa-quote-left back-icon"></i>
-                        <div class="feature-left-content">
-                            <strong>Larry E.</strong>
-                            <p>I thought I'd have to wait since I did an online form, but your representative contacted me for same day pickup! I had my old busted car removed from my driveway in no time at all. The money was just a bonus</p>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6 feature-left">
-                        <i class="fa fa-quote-left back-icon"></i>
-                        <div class="feature-left-content">
-                            <strong>Lucy R.</strong>
-                            <p>You know how some people's trash is another person's treasure?  Well, my old scrap car was worth a sweet thousand dollars to Calgary Scrap Auto Removal. And here I was ready to just have it hauled to the scrap yard!</p>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6 feature-left">
-                        <i class="fa fa-quote-left back-icon"></i>
-                        <div class="feature-left-content">
-                            <strong>Mary O.</strong>
-                            <p>Got a scrap car that is missing tires, keys, or other parts that you have the title to?  Other car recyclers might not take it, but Calgary Scrap Auto Removal will.  The tow truck was sent quickly, the junk car loaded on the flat bed in a professional manner, and I was still paid for it, even though all I had was the title.  Definitely the way to go.</p>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6 feature-left">
-                        <i class="fa fa-quote-left back-icon"></i>
-                        <div class="feature-left-content">
-                            <strong>Allen S.</strong>
-                            <p>My old car served me faithfully for years.  I loved that thing.  I would have hated to just see it in the landfill.  Selling it to the helpful and professional staff at Calgary Scrap Auto Removal meant that some time in the future another car or product will have something from my beloved vehicle because it will be recycled.  That makes me feel good about having to finally replace it</p>
-                        </div>
-                    </div>
-
-                     <div class="col-sm-6 feature-left">
-                        <i class="fa fa-quote-left back-icon"></i>
-                        <div class="feature-left-content">
-                            <strong>Mr. &amp; Mrs. Richard S.</strong>
-                            <p>It was very important to us that the car we were junking was recycled.  Indeed we considered paying fees to have it properly dismantled.  Selling it was something we were very cautious about. Calgary Scrap Auto Removal assured us that the entire vehicle would be reused or recycled in some form, and that we deserved to gain something for our efforts to recycle it.  Because we asked about the recycling process, the company kept us abreast of the entire procedure from start to finish.  Our Deepest gratitude for allowing us to rest easy knowing we have done the right thing</p>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6 feature-left">
-                        <i class="fa fa-quote-left back-icon"></i>
-                        <div class="feature-left-content">
-                            <strong>Mark O.</strong>
-                            <p>Sometimes getting someone to pick up an old non-running clunker is such a pain.  Before I contacted Calgary Auto Scrap Removal I went through a bunch of other auto recyclers who refused to come take the car due to its location.  I know I'm not the only one who lives someplace with underground parking.  I recommend Calgary Auto Scrap Removal for anyone living in downtown Calgary</p>
-                        </div>
-                    </div>
+					@endforeach
 
                 </div>
 				<div class="row">
@@ -238,7 +159,7 @@
 				</div>
             </div>
         </section>
-
+		@endif
 
 
 
@@ -315,7 +236,9 @@
         </footer>
         <!-- End Footer -->
 
-        <script src="js/webpage.js"></script>
+        <script src="js/jquery.js"></script>
+        <script src="js/init.min.js"></script>
+        <script src="js/scripts.js"></script>
 
         <script>
 		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

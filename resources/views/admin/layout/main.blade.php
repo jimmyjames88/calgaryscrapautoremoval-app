@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title></title>
+		<title>{{ (isset($page['title']) ? $page['title'] : '...') }}</title>
 		<meta name="csrf-token" content="{{ csrf_token() }}">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -11,7 +11,8 @@
 	<body>
 		<div id="app">
 			<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
-				<a class="navbar-brand" href="#">Calgary Scrap Auto Removal</a>
+				@include('admin.layout.components.back-button')
+				<a class="navbar-brand" href="#">C.S.A.R.</a>
 				@if(Auth::check())
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
@@ -31,7 +32,7 @@
 							</a>
 						</li>
 						@endif
-						@if(auth()->user()->hasPermission('manage-users') || auth()->user()->hasPermission('manage-emails'))
+						@if(auth()->user()->hasPermission('manage-users'))
 						<li class="nav-item">
 							<a class="nav-link" href="/admin/settings">
 								<i class="fa fa-cog"></i> Settings
@@ -59,11 +60,20 @@
 					</ul>
 				</nav>
 			</div> -->
-			@hasSection('mobileNav')
 			<div class="container mb-4">
-				@yield('mobileNav')
+				<div class="row">
+					@isset($page['title'])
+						<div class="col">
+							<h4 class="title">{{ $page['title'] }}</h4>
+						</div>
+					@endif
+					@hasSection('mobileNav')
+						<div class="col text-right">
+							@yield('mobileNav')
+						</div>
+					@endif
+				</div>
 			</div>
-			@endif
 			@if(session()->has('success'))
 			<div class="container">
 				<div class="alert alert-success">

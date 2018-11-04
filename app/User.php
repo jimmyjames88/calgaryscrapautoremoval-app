@@ -58,4 +58,11 @@ class User extends Authenticatable
 		$this->permissions()->detach();
 		$this->permissions()->attach($permissions);
 	}
+
+	public static function withPermission($slug)
+	{
+		$permission = Permission::where('slug', '=', $slug)
+								->first();
+		return $permission->users;
+	}
 }

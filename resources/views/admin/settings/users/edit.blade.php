@@ -1,13 +1,5 @@
 @extends('admin.layout.main')
-@section('mobileNav')
-<div class="row">
-	<div class="col">
-		<a href="/admin/settings/users" class="btn btn-secondary">
-			<i class="fa fa-caret-left"></i>
-		</a>
-	</div>
-</div>
-@endsection
+
 
 @section('content')
 <div class="container">
@@ -18,7 +10,6 @@
 		@endforeach
 	</ul>
 	@endif
-	<h3 class="title">Edit Account</h3>
 	<form action="/admin/settings/users/{{ $user->id }}" method="POST">
 		@csrf
 		<input type="hidden" name="_method" value="PUT" />

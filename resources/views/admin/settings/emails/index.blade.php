@@ -1,17 +1,8 @@
 @extends('admin.layout.main')
 @section('mobileNav')
-<div class="row">
-	<div class="col">
-		<a href="/admin/settings" class="btn btn-secondary">
-			<i class="fa fa-caret-left"></i>
-		</a>
-	</div>
-	<div class="col text-right">
-		<a href="/admin/settings/users/create" class="btn btn-primary">
-			<i class="fa fa-user-plus"></i>
-		</a>
-	</div>
-</div>
+<a href="/admin/settings/users/create" class="btn btn-primary">
+	<i class="fa fa-user-plus"></i>
+</a>
 @endsection
 
 @section('content')

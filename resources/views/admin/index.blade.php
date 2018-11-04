@@ -22,7 +22,7 @@
 				<i class="fa fa-comment"></i> Testimonials
 			</a>
 			@endif
-			@if (auth()->user()->hasPermission('manage-users') || auth()->user()->hasPermission('manage-emails'))
+			@if (auth()->user()->hasPermission('manage-users'))
 			<a href="/admin/settings" class="list-group-item">
 				<i class="fa fa-cog"></i> Settings
 			</a>

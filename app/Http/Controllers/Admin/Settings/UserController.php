@@ -22,8 +22,12 @@ class UserController extends Controller
      */
     public function index()
     {
+		$page = [
+			'title'		=> 'Users',
+			'backUrl'	=>	'/admin/settings'
+		];
 		$users = User::orderBy('id','ASC')->get();
-        return view('admin.settings.users.index', compact('users'));
+        return view('admin.settings.users.index', compact('users', 'page'));
     }
 
     /**
@@ -33,9 +37,13 @@ class UserController extends Controller
      */
     public function create()
     {
+		$page = [
+			'title'		=> 'Create User',
+			'backUrl'	=>	'/admin/settings/users'
+		];
 		$user = new User;
 		$permissions = Permission::all();
-        return view('admin.settings.users.create', compact('user', 'permissions'));
+        return view('admin.settings.users.create', compact('user', 'permissions', 'page'));
     }
 
     /**
@@ -87,9 +95,14 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $user = User::find($id);
+		$user = User::find($id);
+		$page = [
+			'title'		=> 'Edit ' . $user->name,
+			'backUrl'	=>	'/admin/settings/users'
+		];
+
 		$permissions = Permission::all();
-		return view('admin.settings.users.edit', compact('user', 'permissions'));
+		return view('admin.settings.users.edit', compact('user', 'permissions', 'page'));
     }
 
     /**
@@ -145,7 +158,11 @@ class UserController extends Controller
 	public function delete($id)
 	{
 		$user = User::find($id);
-		return view('admin.settings.users.delete', compact('user'));
+		$page = [
+			'title'		=> 'Delete ' . $user->name . '?',
+			'backUrl'	=>	'/admin/settings/users/'
+		];
+		return view('admin.settings.users.delete', compact('user', 'page'));
 	}
 
 	public function change_password($id, Request $request)

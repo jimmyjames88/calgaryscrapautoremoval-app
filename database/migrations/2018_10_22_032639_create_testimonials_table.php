@@ -17,7 +17,7 @@ class CreateTestimonialsTable extends Migration
             $table->increments('id');
 			$table->string('name');
 			$table->text('comment');
-			$table->integer('order');
+			$table->integer('order')->default(999);
             $table->timestamps();
         });
     }

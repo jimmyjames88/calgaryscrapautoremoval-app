@@ -1,26 +1,16 @@
 @extends('admin.layout.main')
 @section('mobileNav')
-<div class="row">
-	<div class="col">
-		<a href="/admin/leads" class="btn btn-secondary">
-			<i class="fa fa-arrow-left"></i>
-		</a>
-	</div>
-	@if (auth()->user()->hasPermission('manage-leads'))
-	<div class="col text-right">
-		<a href="/admin/leads/{{ $lead->id }}/edit" class="btn btn-primary">
-			<i class="fa fa-pencil"></i>
-		</a>
-		<a href="/admin/leads/{{ $lead->id }}/delete" class="btn btn-danger">
-			<i class="fa fa-trash"></i>
-		</a>
-	</div>
-	@endif
-</div>
+@if (auth()->user()->hasPermission('manage-leads'))
+	<a href="/admin/leads/{{ $lead->id }}/edit" class="btn btn-primary">
+		<i class="fa fa-pencil"></i>
+	</a>
+	<a href="/admin/leads/{{ $lead->id }}/delete" class="btn btn-danger">
+		<i class="fa fa-trash"></i>
+	</a>
+@endif
 @endsection
 @section('content')
 <div class="container">
-	<h3 class="title">{{ $lead->name }}</h3>
 	<div class="card mb-3">
 		<div class="card-body">
 			<h6 class="card-title mb-0">
@@ -34,15 +24,15 @@
 		</div>
 	</div>
 	<div class="list-group">
-		<a href="#" class="list-group-item">
+		<a href="tel:{{ $lead->phone }}" class="list-group-item">
 			<i class="fa fa-phone"></i> {{ $lead->phone }}
 		</a>
-		<a href="#" class="list-group-item">
+		<a href="mailto:{{ $lead->email }}?body={{ str_replace('+', '%20', urlencode($lead->message)) }}&subject=Calgary%20Scrap%20Auto%20Removal" class="list-group-item">
 			<i class="fa fa-envelope"></i> {{ $lead->email }}
 		</a>
 	</div>
 	<p class="text-center mt-4 small text-muted">
-		<em>Last edited: {{ $lead->updated_at }}</em>
+		<em>Originally opened by: {{ $lead->openedBy() }}</em>
 	</p>
 </div>
 @endsection

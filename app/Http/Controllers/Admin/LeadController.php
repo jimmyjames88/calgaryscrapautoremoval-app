@@ -5,18 +5,45 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Admin\Lead;
+use App\Jobs\SendSubmissionEmail;
+use Mail;
+use App\Mail\WebsiteSubmission;
 
 class LeadController extends Controller
 {
+
+	public function __construct()
+	{
+		$this->validation_rules = [
+			'name'		=>	'required|min:2|max:40',
+			'phone'		=>	'required|min:10|max:20',
+			'email'		=>	'required|email|max:190',
+			'message'	=>	'required|min:5|max:300'
+		];
+	}
+
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $leads = Lead::latest()->simplePaginate(30);
-		return view('admin.leads.index', compact('leads'));
+		$page = [
+			'title'		=>	'Leads',
+			'backUrl'	=>	'/admin'
+		];
+
+		if($request->order && $request->order){
+			$backUrl = '/admin/leads';
+			$leads = Lead::orderBy($request->order)->simplePaginate(30);
+		} else {
+			$leads = Lead::latest()->simplePaginate(30);
+		}
+
+
+		return view('admin.leads.index', compact('leads', 'page'));
     }
 
     /**
@@ -26,8 +53,12 @@ class LeadController extends Controller
      */
     public function create()
     {
+		$page = [
+			'title'		=>	'Create Lead',
+			'backUrl'	=>	'/admin/leads'
+		];
 		$lead = new Lead;
-        return view('admin.leads.create', compact('lead'));
+        return view('admin.leads.create', compact('lead', 'page'));
     }
 
     /**
@@ -38,12 +69,7 @@ class LeadController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->validate([
-			'name'		=>	'required|min:2|max:40',
-			'phone'		=>	'required|min:10|max:20',
-			'email'		=>	'required|email|max:190',
-			'message'	=>	'required|min:5|max:300'
-		]);
+        $data = $request->validate($this->validation_rules);
 
 		$lead = Lead::create($data);
 
@@ -61,14 +87,18 @@ class LeadController extends Controller
      */
     public function show($id)
     {
-        $lead = Lead::find($id);
+		$lead = Lead::find($id);
+		$page = [
+			'title'		=>	$lead->name,
+			'backUrl'	=>	'/admin/leads'
+		];
+
 
 		// Mark unread when shown
 		if($lead->unread) {
-			$lead->unread = false;
-			$lead->save();
+			$lead->markRead();
 		}
-		return view('admin.leads.show', compact('lead'));
+		return view('admin.leads.show', compact('lead', 'page'));
     }
 
     /**
@@ -79,8 +109,12 @@ class LeadController extends Controller
      */
     public function edit($id)
     {
+		$page = [
+			'title'		=>	'Edit Lead #' . $id,
+			'backUrl'	=>	'/admin/leads/' . $id
+		];
         $lead = Lead::find($id);
-		return view('admin.leads.edit', compact('lead'));
+		return view('admin.leads.edit', compact('lead', 'page'));
     }
 
     /**
@@ -94,12 +128,7 @@ class LeadController extends Controller
     {
         $lead = Lead::find($id);
 
-		$data = $request->validate([
-			'name'		=>	'required|min:2|max:40',
-			'phone'		=>	'required|min:10|max:20',
-			'email'		=>	'required|email|max:190',
-			'message'	=>	'required|min:5|max:300'
-		]);
+		$data = $request->validate($this->validation_rules);
 
 		$lead->name = $data['name'];
 		$lead->email = $data['email'];
@@ -135,13 +164,44 @@ class LeadController extends Controller
 
 	public function delete($id)
 	{
+		$page = [
+			'backUrl'	=>	'/admin/leads/' . $id
+		];
 		$lead = Lead::find($id);
-		return view('admin.leads.delete', compact('lead'));
+		return view('admin.leads.delete', compact('lead', 'page'));
 	}
 
 	public function search(Request $request)
 	{
+		$page = [
+			'title'		=>	$request->searchDate,
+			'backUrl'	=>	'/admin/leads'
+		];
+
 		$leads = Lead::whereDate('created_at', date('Y-m-d', strtotime($request->searchDate)))->latest()->simplePaginate(30);
-		return view('admin.leads.index', compact('leads'));
+		return view('admin.leads.index', compact('leads', 'page'));
+	}
+
+	public function submission(Request $request)
+	{
+		$data = $request->validate($this->validation_rules);
+		if($lead = Lead::create($data)){
+
+			$recipients = \App\User::withPermission('email-alerts');
+			foreach($recipients as $recipient){
+				$emails[] = $recipient->email;
+			}
+
+			Mail::to($emails)
+			    ->send(new WebsiteSubmission($lead));
+
+			echo json_encode([
+				'status'	=>	'success',
+				'message' 	=> 	'Thanks! Your submission has been received. We\'ll get back to you shortly!'
+			]);
+			return;
+		}
+
+
 	}
 }
