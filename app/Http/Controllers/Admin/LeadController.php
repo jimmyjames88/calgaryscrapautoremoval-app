@@ -192,13 +192,15 @@ class LeadController extends Controller
 				$emails[] = $recipient->email;
 			}
 
-			Mail::to($emails)
-			    ->send(new WebsiteSubmission($lead));
+			if(isset($emails)){
+				Mail::to($emails)
+				    ->send(new WebsiteSubmission($lead));
 
-			echo json_encode([
-				'status'	=>	'success',
-				'message' 	=> 	'Thanks! Your submission has been received. We\'ll get back to you shortly!'
-			]);
+				echo json_encode([
+					'status'	=>	'success',
+					'message' 	=> 	'Thanks! Your submission has been received. We\'ll get back to you shortly!'
+				]);
+			}
 			return;
 		}
 
