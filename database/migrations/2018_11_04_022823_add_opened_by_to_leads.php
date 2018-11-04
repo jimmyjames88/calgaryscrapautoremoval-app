@@ -14,7 +14,7 @@ class AddOpenedByToLeads extends Migration
     public function up()
     {
 		Schema::table('leads', function (Blueprint $table) {
-            $table->integer('opened_by')->nullable();
+            $table->unsignedInteger('opened_by')->nullable();
 			$table->foreign('opened_by')->references('id')->on('users');
         });
     }
