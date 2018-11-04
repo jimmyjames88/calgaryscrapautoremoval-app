@@ -10,15 +10,15 @@
 		@endforeach
 	</ul>
 	@endif
-	<form action="/admin/settings/users/{{ $user->id }}" method="POST">
+	<form action="/admin/settings/users" method="POST">
 		@csrf
 		<div class="form-group">
 			<label>Name</label>
-			<input type="text" name="name" value="{{ $user->name }}" class="form-control" />
+			<input type="text" name="name" value="" class="form-control" />
 		</div>
 		<div class="form-group">
 			<label>Email</label>
-			<input type="email" name="email" value="{{ $user->email }}" class="form-control" />
+			<input type="email" name="email" value="" class="form-control" />
 		</div>
 		<div class="form-group">
 			<label>Password</label>
