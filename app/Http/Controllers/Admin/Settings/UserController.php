@@ -59,21 +59,18 @@ class UserController extends Controller
 			'email'		=>	'required|email',
 			'password'	=>	'required|confirmed|min:6|max:20'
 		]);
-
 		$data['password'] = Hash::make($data['password']);
+
         $user = User::create($data);
 
 		if($request->permissions){
-			dd(3);
 			$user->grantPermissions(array_keys($request->permissions));
 		}
 
 		if($user){
-			dd(1);
 			session()->flash('success', 'User created!');
 			return redirect('/admin/settings/users');
 		}
-		dd(2);
 		session()->flash('error', 'Error creating user');
 		return redirect('/admin/settings/users');
     }
