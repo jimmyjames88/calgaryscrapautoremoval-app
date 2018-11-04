@@ -73,7 +73,7 @@ class UserController extends Controller
 			session()->flash('success', 'User created!');
 			return redirect('/admin/settings/users');
 		}
-		dd(2)
+		dd(2);
 		session()->flash('error', 'Error creating user');
 		return redirect('/admin/settings/users');
     }
