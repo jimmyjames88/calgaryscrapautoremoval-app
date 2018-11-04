@@ -61,6 +61,7 @@ class User extends Authenticatable
 
 	public static function withPermission($slug)
 	{
+		$permission = new Permission();
 		$permission = Permission::where('slug', '=', $slug)
 								->first();
 		return $permission->users;
