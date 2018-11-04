@@ -136,6 +136,7 @@
             </div>
         </section>
         <!-- End Testimonials -->
+		@endif
 
 		<section id="testimonials_all" class="pt80 pb90" style="display:none;">
             <div class="container">
@@ -159,7 +160,7 @@
 				</div>
             </div>
         </section>
-		@endif
+
 
 
 

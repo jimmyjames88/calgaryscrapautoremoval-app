@@ -68,10 +68,10 @@ class UserController extends Controller
 		}
 
 		if($user){
+
 			session()->flash('success', 'User created!');
 			return redirect('/admin/settings/users');
 		}
-
 		session()->flash('error', 'Error creating user');
 		return redirect('/admin/settings/users');
     }
