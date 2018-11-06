@@ -63,7 +63,7 @@ class User extends Authenticatable
 	{
 		$permission = Permission::where('slug', '=', $slug)
 								->first();
-		if(count($permission)){
+		if($permission->count()){
 			return $permission->users;
 		}
 		return false;

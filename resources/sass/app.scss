@@ -1,4 +1,3 @@
-
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito');
 
@@ -9,6 +8,10 @@
 @import '~bootstrap/scss/bootstrap';
 //@import url('https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css');
 @import '~font-awesome/scss/font-awesome';
+
+body {
+	font-size: 125%;
+}
 
 .navbar-laravel {
   background-color: #fff;
@@ -40,5 +43,5 @@ header h1 {
 
 nav.navbar .navbar-brand {
 	margin-right: auto;
-	margin-left: 0.5rem; 
+	margin-left: 0.5rem;
 }
