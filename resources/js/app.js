@@ -7,7 +7,7 @@
 
 require('./bootstrap');
 require('./jquery-ui');
-require('./jquery.ui.touch-punch');  
+require('./jquery.ui.touch-punch');
 
 $('.sortable').sortable({
 	handle: '.handle',
@@ -21,7 +21,6 @@ $('.sortable').sortable({
 			var id = $(this).data('id');
 			order[k] = id;
 		});
-
 
 
 		var self = $(this);

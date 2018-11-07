@@ -22,7 +22,7 @@
 					<ul class="navbar-nav mr-auto">
 						<li class="nav-item">
 							<a class="nav-link" href="/admin/leads">
-								<i class="fa fa-address-card-o"></i> Leads
+								<i class="fa fa-address-card-o"></i> Leads <span class="badge badge-danger">{{ App\Admin\Lead::unreadCount() }}</span>
 							</a>
 						</li>
 						@if(auth()->user()->hasPermission('manage-testimonials'))

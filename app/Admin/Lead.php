@@ -26,4 +26,8 @@ class Lead extends Model
 
 		return $user->name;
 	}
+
+	public static function unreadCount(){
+		return Lead::where('unread', '=', true)->count();
+	}
 }

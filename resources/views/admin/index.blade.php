@@ -4,12 +4,14 @@
 	<div class="card mb-4">
 		<div class="card-body text-center">
 			<h5 class="card-title">
-				{{ $leadCount['daily'] }} submissions today
+
 			</h5>
-			<p>({{ $leadCount['weekly'] }} this week )</p>
-			<a href="/admin/leads" class="btn btn-primary btn-sm ml-2">
-				<i class="fa fa-address-card-o"></i> View
-			</a>
+			<p>
+				{{ $leadCount['daily'] }} leads today ({{ App\Admin\Lead::unreadCount() }} unread)
+				<a href="/admin/leads" class="btn btn-primary ml-2">
+					<i class="fa fa-address-card-o"></i> View
+				</a>
+			</p>
 		</div>
 	</div>
 	<nav>
