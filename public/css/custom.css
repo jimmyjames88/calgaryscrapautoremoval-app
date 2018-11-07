@@ -26,6 +26,12 @@ nav.navbar .navbar-header {
 	padding: 0 !important;
 }
 
+.row::after {
+    content: '';
+    clear: both;
+    display: block;
+}
+
 @media screen and (max-width:1023px) {
     nav.navbar {
         height: 54px
