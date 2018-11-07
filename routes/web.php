@@ -13,6 +13,8 @@ use App\User;
 |
 */
 
+date_default_timezone_set('America/Edmonton');
+
 Route::get('/', 'HomepageController@index');
 
 Route::post('/contact', 'Admin\LeadController@submission');
@@ -59,11 +61,9 @@ Route::middleware(['auth', 'checkPermission:manage-emails'])->group(function(){
 });
 
 Route::middleware(['auth', 'checkPermission:manage-leads'])->group(function(){
-
 	Route::get('/admin/leads/{lead}/delete', 'Admin\LeadController@delete');
 	Route::delete('/admin/leads/{lead}', 'Admin\LeadController@destroy');
 });
-
 
 
 Auth::routes();

@@ -290,22 +290,26 @@
 					    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 					},
 					complete: function (data) {
+						console.log(data);
 						data = JSON.parse(data.responseText);
 						var userMsg = document.getElementById('message-info');
 
 						if(data.status == 'success'){
 							userMsg.classList.add('alert', 'alert-success');
 							userMsg.innerHTML = data.message;
-
+							$('#contactform input, #contactform textarea').hide();
 
 							goog_report_conversion ();
-                            $('#contactform').slideUp(850, 'easeInOutExpo');
 						} else {
 							userMsg.classList.add('alert', 'alert-danger');
 							userMsg.innerHTML = '';
-							$.each(data.errors, function(k,v){
-								userMsg.innerHTML += v + '<br />';
-							});
+							if(data.errors){
+								$.each(data.errors, function(k,v){
+									userMsg.innerHTML += v + '<br />';
+								});
+							} else {
+								userMsg.innerHTML = 'Sorry, unknown error. Please contact us directly at (403) 991-7717';
+							}
 						}
 						$('#contactform .loader div').fadeOut('slow', function() {
 							$(this).remove();

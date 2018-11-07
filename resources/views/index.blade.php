@@ -82,13 +82,16 @@
 							<div class="col-sm-12">
 								<textarea name="message" rows="9" id="message" placeholder="Vehicle Year/Make/Model/Mileage" required></textarea>
 							</div>
-
+							<div class="col-sm-12">
+								<div id="message-info"></div>
+							</div>
 							<div class="col-sm-12">
 								<input type="submit" class="submit btn btn-lg btn-primary" id="submit" value="Get Quote!"/>
 							</div>
 
+
 						</form>
-						<div id="message-info"></div>
+
 					</div>
 
 				</div>

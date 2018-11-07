@@ -7,13 +7,14 @@
 
 @section('content')
 <div class="container">
+	<p class="small">The top 5 will be displayed in the slider.</p>
 	<div class="list-group sortable">
 		@if(count($testimonials))
 		@foreach ($testimonials as $testimonial)
 		<div class="list-group-item" data-id="{{ $testimonial->id }}">
 			<div class="row">
-				<div class="col col-2 handle">
-					<i class="fa fa-arrows-v fa-2x text-muted"></i>
+				<div class="col col-2 handle d-flex align-items-center">
+					<i class="fa fa-arrows-v fa-2x text-muted d-inline-flex justify-content-center"></i>
 				</div>
 				<div class="col col-6">
 					{{ $testimonial->name }}

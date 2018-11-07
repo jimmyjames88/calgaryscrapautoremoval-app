@@ -14218,6 +14218,7 @@ a.white {
 
 nav.navbar {
   height: 68px;
+  padding: 0 !important;
 }
 
 nav.navbar .navbar-header {

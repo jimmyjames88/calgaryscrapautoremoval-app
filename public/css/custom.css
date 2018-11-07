@@ -18,11 +18,12 @@ a.white {
 }
 
 nav.navbar {
-    height: 68px
+    height: 68px;
 }
 
 nav.navbar .navbar-header {
-    width: 100%
+    width: 100%;
+	padding: 0 !important;
 }
 
 @media screen and (max-width:1023px) {

@@ -184,25 +184,33 @@ class LeadController extends Controller
 
 	public function submission(Request $request)
 	{
+		// form validation
 		$data = $request->validate($this->validation_rules);
-		if($lead = Lead::create($data)){
 
+		// Store new POSTed lead
+		$lead = Lead::create($data);
+		if($lead){
+
+			// Send emails to users with email-alerts permission
 			$recipients = \App\User::withPermission('email-alerts');
-			foreach($recipients as $recipient){
-				$emails[] = $recipient->email;
+			if($recipients->count()){
+				foreach($recipients as $recipient){
+					$emails[] = $recipient->email;
+				}
 			}
-
+			// Consider moving this to a dedicated email controller?
 			if(isset($emails)){
 				Mail::to($emails)
 				    ->send(new WebsiteSubmission($lead));
-
-				echo json_encode([
-					'status'	=>	'success',
-					'message' 	=> 	'Thanks! Your submission has been received. We\'ll get back to you shortly!'
-				]);
 			}
-			return;
+			// return ajax success response
+			return [
+				'status'	=>	'success',
+				'message' 	=> 	'Thanks! Your submission has been received. We\'ll get back to you shortly!'
+			];
 		}
+		// return ajax fail response
+		return false;
 
 
 	}
