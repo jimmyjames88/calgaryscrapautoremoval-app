@@ -8,10 +8,10 @@
 			</h5>
 			<p>
 				{{ $leadCount['daily'] }} leads today ({{ App\Admin\Lead::unreadCount() }} unread)
-				<a href="/admin/leads" class="btn btn-primary ml-2">
-					<i class="fa fa-address-card-o"></i> View
-				</a>
 			</p>
+			<a href="/admin/leads" class="btn btn-primary ml-2">
+				<i class="fa fa-address-card-o"></i> View
+			</a>
 		</div>
 	</div>
 	<nav>
